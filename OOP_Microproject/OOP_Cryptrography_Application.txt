@@ -1,0 +1,123 @@
+#include <iostream>
+#include <string>
+#include <fstream> // For file handling
+
+class CaesarCipher {
+public:
+    // Function to encrypt the text
+    std::string encrypt(const std::string& plaintext, int key) {
+        std::string ciphertext = "";
+        for (char c : plaintext) {
+            // Encrypt uppercase characters
+            if (isupper(c)) {
+                ciphertext += char(int(c + key - 65) % 26 + 65);
+            }
+            // Encrypt lowercase characters
+            else if (islower(c)) {
+                ciphertext += char(int(c + key - 97) % 26 + 97);
+            }
+            // Leave non-alphabetic characters unchanged
+            else {
+                ciphertext += c;
+            }
+        }
+        return ciphertext;
+    }
+
+    // Function to decrypt the text
+    std::string decrypt(const std::string& ciphertext, int key) {
+        std::string plaintext = "";
+        for (char c : ciphertext) {
+            // Decrypt uppercase characters
+            if (isupper(c)) {
+                plaintext += char(int(c - key - 65 + 26) % 26 + 65);
+            }
+            // Decrypt lowercase characters
+            else if (islower(c)) {
+                plaintext += char(int(c - key - 97 + 26) % 26 + 97);
+            }
+            // Leave non-alphabetic characters unchanged
+            else {
+                plaintext += c;
+            }
+        }
+        return plaintext;
+    }
+};
+
+int main() {
+    CaesarCipher cipher;
+    std::string text, fileName;
+    int key, choice;
+
+    do {
+        std::cout << "\n--- Caesar Cipher Cryptography Application ---\n";
+        std::cout << "1. Encrypt and Save to File\n";
+        std::cout << "2. Decrypt\n";
+        std::cout << "3. Exit\n";
+        std::cout << "Choose an option: ";
+        std::cin >> choice;
+
+        switch (choice) {
+        case 1: {
+            std::cout << "Enter plaintext: ";
+            std::cin.ignore();
+            std::getline(std::cin, text);
+            std::cout << "Enter key (1-25): ";
+            std::cin >> key;
+
+            if (key < 1 || key > 25) {
+                std::cout << "Invalid key. Please enter a key between 1 and 25.\n";
+            } else {
+                std::string encryptedText = cipher.encrypt(text, key);
+                
+                // Ask the user for a file name to save the ciphertext and key
+                std::cout << "Enter file name to save (e.g., 'output.txt'): ";
+                std::cin.ignore();  // Clear the newline left by the previous input
+                std::getline(std::cin, fileName);
+                
+                // Save the ciphertext and key to the specified file
+                std::ofstream outFile(fileName); 
+                if (outFile.is_open()) {
+                    outFile << "Ciphertext: " << encryptedText << "\n";
+                    outFile << "Key: " << key << "\n";
+                    outFile.close();
+                    std::cout << "Encrypted text and key saved to '" << fileName << "'.\n";
+                    
+                    // Display the ciphertext and key in the terminal
+                    std::cout << "Ciphertext: " << encryptedText << "\n";
+                    std::cout << "Key: " << key << "\n";
+                } else {
+                    std::cout << "Error opening file!\n";
+                }
+            }
+            break;
+        }
+
+        case 2: {
+            std::cout << "Enter ciphertext: ";
+            std::cin.ignore();
+            std::getline(std::cin, text);
+            std::cout << "Enter key (1-25): ";
+            std::cin >> key;
+
+            if (key < 1 || key > 25) {
+                std::cout << "Invalid key. Please enter a key between 1 and 25.\n";
+            } else {
+                std::string decryptedText = cipher.decrypt(text, key);
+                std::cout << "Decrypted text: " << decryptedText << "\n";
+            }
+            break;
+        }
+
+        case 3:
+            std::cout << "Exiting the application.\n";
+            break;
+
+        default:
+            std::cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 3);
+
+    return 0;
+}

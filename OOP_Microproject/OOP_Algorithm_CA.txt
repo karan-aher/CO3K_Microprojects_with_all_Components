@@ -1,0 +1,37 @@
+
+
+ Algorithm
+
+ Main Function:
+1. Initialize: Create a `CaesarCipher` object, and define `text`, `key`, and `choice`.
+2. Display Menu: Loop until the user chooses to exit:
+   - Show options: Encrypt, Decrypt, Exit.
+   - Read user choice.
+3. If Encrypt:
+   - Get plaintext and key.
+   - Validate key (1-25).
+   - Call `encrypt(text, key)` and display the result.
+4.If Decrypt:
+   - Get ciphertext and key.
+   - Validate key (1-25).
+   - Call `decrypt(text, key)` and display the result.
+5. If Exit: Show exit message.
+6. If Invalid Choice: Show error message.
+
+---
+
+ Encryption Function:
+1. Initialize: `ciphertext` as an empty string.
+2. For each character `c` in `plaintext`:
+   - If `c` is uppercase: Encrypt using the formula `((c - 'A' + key) % 26) + 'A'`.
+   - If `c` is lowercase: Encrypt using `((c - 'a' + key) % 26) + 'a'`.
+   - If not alphabetic: Append `c` unchanged.
+3. Return `ciphertext`.
+
+ Decryption Function:
+1. Initialize: `plaintext` as an empty string.
+2. For each character `c` in `ciphertext`:
+   - If `c` is uppercase: Decrypt using `((c - 'A' - key + 26) % 26) + 'A'`.
+   - If `c` is lowercase: Decrypt using `((c - 'a' - key + 26) % 26) + 'a'`.
+   - If not alphabetic: Append `c` unchanged.
+3. Return `plaintext`
