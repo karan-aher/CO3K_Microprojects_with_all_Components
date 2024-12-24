@@ -1,0 +1,44 @@
+Algorithm:
+
+1. Start the program.
+
+2. Initialize graphics mode:
+   - Detect the graphics driver and mode.
+   - Initialize the graphics system using `initgraph()`.
+
+3. Set background color to black.
+
+4. Display Instructions:
+   - Display the instructions using `outtextxy()` for the user to press 'L', 'H', 'T', or 'P' and '1' to quit.
+   - Display author information.
+
+5. Loop indefinitely until a key is pressed (`while(1)` loop):
+   - Draw shapes and elements on the screen:
+     - Car Body:
+       - Draw ellipses, lines, and mirrors for the car's front, rear, wheels, and side mirrors.
+       - The shapes are created using `line()` and `ellipse()` functions.
+     - Wheels:
+       - Draw two sets of wheels using `ellipse()` and additional shapes for details.
+   
+6. Handle Key Press Events:
+   - If '1' is pressed:
+     - Exit the program.
+   - If 'H' is pressed**:
+     - Play a horn sound using `sound()` and `delay()`.
+     - Stop the sound using `nosound()`.
+   - If 'T' is pressed:
+     - Perform an animation by changing colors on various parts of the car (use `floodfill()` to fill shapes).
+     - Randomize colors for an animated effect.
+   - If 'L' is pressed:
+     - Perform a lighting effect using `floodfill()` to fill car lights and road elements with color.
+     - Animate parts of the car and the road with delays for a smooth effect.
+   - If 'P' is pressed:
+     - Perform an animation for raising and lowering a rectangle on the screen, simulating a lifting door or other moving object.
+     - Display text for lights and horn.
+
+7. Handle Final Shapes:
+   - After processing key events, draw a circle at `(300, 100)` as a decorative element.
+   - Wait for a keypress using `getch()`.
+
+8. End the program.
+

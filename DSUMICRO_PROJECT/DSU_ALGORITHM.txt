@@ -1,0 +1,25 @@
+ Algorithm:
+
+
+1. Start the program.
+
+2. Initialize rooms:
+   - Set each room as available.
+   - Assign room type (AC or Non-AC).
+   - Save room data to a file.
+
+3. Display menu with options:
+   1. Display Room Status.
+   2. Book a Room.
+   3. Checkout and Generate Bill.
+   4. Unbook a Room.
+   5. Exit.
+
+4. Process user input:
+   - If `1`: Show room status (available/occupied).
+   - If `2`: Book a room (ask for name, days, and assign room).
+   - If `3`: Checkout (calculate bill based on room type, free room).
+   - If `4`: Unbook a room (free the room).
+   - If `5`: Exit the program.
+
+5. Repeat until user chooses to exit.
